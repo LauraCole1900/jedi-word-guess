@@ -48,8 +48,13 @@
 
 
 // Global variables
+let word = "";
 const wordArr = ["sith lord", "tatooine", "luke skywalker", "millenium falcon", "leia organa", "kylo ren", "ewoks", "wookiee", "grogu", "boba fett", "lightsaber", "jedi knight", "padawan", "coruscant", "ahsoka tano", "din djarin", "mandalorian", "darth vader", "anakin skywalker", "the force", "chewbacca", "yoda", "endor", "tusken raider", "obi-wan kenobi", "han solo", "death star", "tie fighter", "alderaan", "lando calrissian", "mos eisley", "jabba the hutt", "sarlacc", "droid", "kuiil", "moff gideon"]
 
-const wordIndex = () => {
-  Math.floor(Math.random() * wordArr.length)
+const findWord = () => {
+  const wordIndex = Math.floor(Math.random() * wordArr.length)
+  word = wordArr[wordIndex];
+  console.log({ word });
 }
+
+findWord();
