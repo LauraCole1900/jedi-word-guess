@@ -12,12 +12,23 @@
   --yellow: #ffe81f;
 }
 
+div {
+  border: 1px solid red;
+}
+
 body {
   background: var(--midnight);
   color: var(--yellow);
 }
 
-.gameBoard {
+#gameBoard {
+  font-size: 48px;
   background-color: var(--graphite);
   height: 50vh;
+  padding: 5vh;
+}
+
+#word {
+  display: flex;
+  justify-content: center;
 }
