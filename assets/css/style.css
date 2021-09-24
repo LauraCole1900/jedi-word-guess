@@ -1,0 +1,23 @@
+:root {
+  --goldish: #eca637;
+  --burntOrange: #bc722e;
+  --drab: #72592a;
+  --brick: #9d3014;
+  --maroon: #722120;
+  --sand: #c5a88c;
+  --darkBrown: #523023;
+  --silver: #e2e2e1;
+  --graphite: #5f6f77;
+  --midnight: #121b26;
+  --yellow: #ffe81f;
+}
+
+body {
+  background: var(--midnight);
+  color: var(--yellow);
+}
+
+.gameBoard {
+  background-color: var(--graphite);
+  height: 50vh;
+}

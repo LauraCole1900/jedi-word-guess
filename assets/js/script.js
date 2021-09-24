@@ -57,4 +57,3 @@ const findWord = () => {
   console.log({ word });
 }
 
-findWord();
