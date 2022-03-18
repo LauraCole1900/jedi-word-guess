@@ -54,20 +54,24 @@ $(document).ready(function () {
   const gameDiv = $("#gameBoard");
   const wordDiv = $("#word");
   const letterDiv = $("#letters");
+  const winSpan = $("#wins");
+  const lossSpan = $("#losses");
   let losses = 0;
   let wins = 0;
   let time = 0;
   let word = "";
   let wordToGuessArr = [];
   let blankArr = [];
-  const wordArr = ["sith lord", "tatooine", "luke skywalker", "millenium falcon", "leia organa", "kylo ren", "ewoks", "wookiee", "grogu", "boba fett", "lightsaber", "jedi knight", "padawan", "coruscant", "ahsoka tano", "din djarin", "mandalorian", "darth vader", "anakin skywalker", "the force", "chewbacca", "yoda", "endor", "tusken raider", "obi-wan kenobi", "han solo", "death star", "tie fighter", "alderaan", "lando calrissian", "mos eisley", "jabba the hutt", "sarlacc", "droid", "kuiil", "moff gideon"]
+  const wordArr = ["sith lord", "tatooine", "luke skywalker", "millenium falcon", "leia organa", "kylo ren", "ewoks", "wookiee", "grogu", "boba fett", "lightsaber", "jedi knight", "padawan", "coruscant", "ahsoka tano", "din djarin", "mandalorian", "darth vader", "anakin skywalker", "the force", "chewbacca", "yoda", "endor", "tusken raider", "obi-wan kenobi", "han solo", "death star", "tie fighter", "alderaan", "lando calrissian", "mos eisley", "jabba the hutt", "sarlacc", "droid", "kuiil", "moff gideon"];
+
+  wins = localStorage.getItem("wins");
+  winSpan.text(wins);
 
   const findWord = () => {
     const wordIndex = Math.floor(Math.random() * wordArr.length)
     word = wordArr[wordIndex];
     console.log({ word });
     wordToGuessArr = word.split("");
-    console.log({ wordToGuessArr });
     generateBlanks(word);
   }
 
@@ -81,7 +85,6 @@ $(document).ready(function () {
         blankArr.push("_");
       }
       $(wordDiv).append(blankEl);
-      console.log({ blankArr });
     }
   }
 
@@ -92,14 +95,14 @@ $(document).ready(function () {
           $(`#${i}`).text(e.key);
           blankArr = blankArr.concat(e.key);
           blankArr.shift();
-          console.log({ blankArr });
         }
         continue;
       }
     }
     if (!blankArr.includes("_")) {
       wins++
-      console.log({ wins });
+      localStorage.setItem("wins", wins);
+      winSpan.text(wins);
     }
   }
 
