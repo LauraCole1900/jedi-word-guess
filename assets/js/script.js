@@ -1,41 +1,4 @@
 $(document).ready(function () {
-  // ## Instructions
-
-  // The completed application should meet the following criteria:
-
-  // * As a user, I want to start the game by clicking on a button. 
-  // * As a user, I want to try and guess a word by filling in a number of blanks that match the number of letters in that word.
-  // * As a user, I want the game to be timed. 
-  // * As a user, I want to win the game when I have guessed all the letters in the word.
-  // * As a user, I want to lose the game when the timer runs out before I have guessed all the letters.
-  // * As a user, I want to see my total wins and losses on the screen. 
-
-  // ### Specifications
-
-  // * When a user presses a letter key, the user's guess should be captured as a key event.
-
-  // * When a user correctly guesses a letter, the corresponding blank "_" should be replaced by the letter. For example, if the user correctly selects "a", then "a _ _ a _" should appear. 
-
-  // * When a user wins or loses a game, a message should appear and the timer should stop. 
-
-  // * When a user clicks the start button, the timer should reset. 
-
-  // * When a user refreshes or returns to the browser page, the win and loss counts should persist.
-
-  // * [MDN Web Docs on KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent)
-
-  // * [MDN Web Docs on Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
-
-  // * [MDN Web Docs on loops and iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration)
-
-  // * [MDN Web Docs on setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval)
-
-  // * [MDN Web Docs on clearInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearInterval)
-
-  // * [MDN Web Docs on localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-
-  // * How can you add a reset button to set the win and loss counts back to zero?
-
 
   // Global variables
   let divEl = $("<div>");
@@ -57,6 +20,8 @@ $(document).ready(function () {
   let blankArr = [];
   const wordArr = ["sith lord", "tatooine", "luke skywalker", "millenium falcon", "leia organa", "kylo ren", "ewoks", "wookiee", "grogu", "boba fett", "lightsaber", "jedi knight", "padawan", "coruscant", "ahsoka tano", "din djarin", "mandalorian", "darth vader", "anakin skywalker", "the force", "chewbacca", "yoda", "endor", "tusken raider", "obi-wan kenobi", "han solo", "death star", "tie fighter", "alderaan", "lando calrissian", "mos eisley", "jabba the hutt", "sarlacc", "droid", "kuiil", "moff gideon"];
 
+  // Gets data from local storage on page load and sets data to wins & losses variables
+  // Hides the gameBoard div on page load
   wins = localStorage.getItem("wins");
   winSpan.text(wins || "0");
   losses = localStorage.getItem("losses");
@@ -80,7 +45,7 @@ $(document).ready(function () {
       if (time <= 0) {
         time = 0;
         timerSpan.text(time);
-        losses++
+        losses++;
         localStorage.setItem("losses", losses);
         lossSpan.text(losses);
         messageDiv.text("You underestimate the power of the Dark Side.");
@@ -93,7 +58,7 @@ $(document).ready(function () {
   }
 
   const findWord = () => {
-    const wordIndex = Math.floor(Math.random() * wordArr.length)
+    const wordIndex = Math.floor(Math.random() * wordArr.length);
     word = wordArr[wordIndex];
     wordToGuessArr = word.split("");
     generateBlanks(word);
@@ -129,10 +94,10 @@ $(document).ready(function () {
     }
     if (!blankArr.includes("_")) {
       clearInterval(timerCount);
-      wins++
+      wins++;
       localStorage.setItem("wins", wins);
       winSpan.text(wins);
-      messageDiv.text("The Force is strong with this one.")
+      messageDiv.text("The Force is strong with this one.");
     }
   }
 
@@ -144,7 +109,7 @@ $(document).ready(function () {
     lossSpan.text(losses);
   }
 
-  $(document).keyup(detectKeypress)
+  $(document).keyup(detectKeypress);
 
   $(startButton).on("click", startGame);
 
