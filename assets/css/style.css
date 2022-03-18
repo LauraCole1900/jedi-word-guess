@@ -12,10 +12,6 @@
   --yellow: #ffe81f;
 }
 
-div {
-  border: 1px solid red;
-}
-
 body {
   background: var(--midnight);
   color: var(--yellow);

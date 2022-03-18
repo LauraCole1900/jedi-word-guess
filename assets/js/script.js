@@ -20,7 +20,7 @@ $(document).ready(function () {
 
   // * When a user clicks the start button, the timer should reset. 
 
-  // * When a user refreshes or returns to the brower page, the win and loss counts should persist.
+  // * When a user refreshes or returns to the browser page, the win and loss counts should persist.
 
   // * [MDN Web Docs on KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent)
 
@@ -35,18 +35,6 @@ $(document).ready(function () {
   // * [MDN Web Docs on localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 
   // * How can you add a reset button to set the win and loss counts back to zero?
-
-  // Needs an array of words
-  // Words are randomly selected from the array -> random number generator
-  // Needs a timer
-  // Needs to show wins & losses
-  // Needs variables to store time elapsed, wins, losses
-  // Needs to generate a number of blanks equal to the length of the word
-  // Needs to show wrong guesses
-  // Needs to detect key events -> keyup? keydown?
-  // If the character code for the key pressed is included in the word, blank(s) turn(s) to that letter
-  // .includes() and indexOf(), probably
-  // also, .toLowerCase()?
 
 
   // Global variables
@@ -88,6 +76,7 @@ $(document).ready(function () {
       $(timerSpan).text(--time);
       if (time <= 0) {
         time = 0;
+        timerSpan.text(time);
         losses++
         localStorage.setItem("losses", losses);
         lossSpan.text(losses);
@@ -99,7 +88,6 @@ $(document).ready(function () {
   const findWord = () => {
     const wordIndex = Math.floor(Math.random() * wordArr.length)
     word = wordArr[wordIndex];
-    console.log({ word });
     wordToGuessArr = word.split("");
     generateBlanks(word);
   }
@@ -119,14 +107,13 @@ $(document).ready(function () {
   }
 
   const detectKeypress = (e) => {
-    console.log(e.key);
-    if (!wordToGuessArr.includes(e.key)) {
+    if (!wordToGuessArr.includes(e.key) && !["Shift", " ",].includes(e.key)) {
       time -= 3;
     }
-    if (!blankArr.includes(e.key)) {
+    if (!blankArr.includes(e.key) && e.key !== " ") {
       for (let i = 0; i < wordToGuessArr.length; i++) {
         if (wordToGuessArr[i] === e.key.toLowerCase()) {
-          $(`#${i}`).text(e.key);
+          $(`#${i}`).text(e.key.toLowerCase());
           blankArr = blankArr.concat(e.key);
           blankArr.shift();
         }
