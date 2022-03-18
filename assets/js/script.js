@@ -43,6 +43,7 @@ $(document).ready(function () {
     timerCount = setInterval(function () {
       $(timerSpan).text(--time);
       if (time <= 0) {
+        clearInterval(timerCount);
         loseGame();
       }
     }, (1000));
@@ -97,7 +98,6 @@ $(document).ready(function () {
   }
 
   const loseGame = () => {
-    clearInterval(timerCount);
     time = 0;
     timerSpan.text(time);
     losses++;
