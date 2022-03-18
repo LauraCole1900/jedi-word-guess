@@ -55,13 +55,13 @@ $(document).ready(function () {
   const startButton = $(".startBtn")
   const gameDiv = $("#gameBoard");
   const wordDiv = $("#word");
-  const timerDiv = $("#timer");
   const timerSpan = $("#timeLeft");
   const winSpan = $("#wins");
   const lossSpan = $("#losses");
+  let timerCount;
   let losses = 0;
   let wins = 0;
-  let time = 30;
+  let time;
   let word = "";
   let wordToGuessArr = [];
   let blankArr = [];
@@ -74,11 +74,26 @@ $(document).ready(function () {
   gameDiv.attr("style", "display: none");
 
   const startGame = () => {
+    time = 15;
+    blankArr = [];
     gameDiv.attr("style", "display: block;");
     startDiv.attr("style", "display: none");
     timerSpan.text(time);
     wordDiv.text("");
     findWord();
+  }
+
+  const startTimer = () => {
+    timerCount = setInterval(function () {
+      $(timerSpan).text(--time);
+      if (time <= 0) {
+        time = 0;
+        losses++
+        localStorage.setItem("losses", losses);
+        lossSpan.text(losses);
+        clearInterval(timerCount);
+      }
+    }, (1000));
   }
 
   const findWord = () => {
@@ -100,9 +115,14 @@ $(document).ready(function () {
       }
       $(wordDiv).append(blankEl);
     }
+    startTimer();
   }
 
   const detectKeypress = (e) => {
+    console.log(e.key);
+    if (!wordToGuessArr.includes(e.key)) {
+      time -= 3;
+    }
     if (!blankArr.includes(e.key)) {
       for (let i = 0; i < wordToGuessArr.length; i++) {
         if (wordToGuessArr[i] === e.key.toLowerCase()) {
@@ -114,6 +134,7 @@ $(document).ready(function () {
       }
     }
     if (!blankArr.includes("_")) {
+      clearInterval(timerCount);
       wins++
       localStorage.setItem("wins", wins);
       winSpan.text(wins);

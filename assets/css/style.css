@@ -46,3 +46,6 @@ body {
   background-color: var(--graphite);
   border: 3px solid var(--yellow);
 }
+.startBtn:hover {
+  box-shadow: 0 0 20px var(--yellow);
+}
