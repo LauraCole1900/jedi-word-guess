@@ -113,7 +113,7 @@ $(document).ready(function () {
     if (!wordToGuessArr.includes(e.key) && !["Shift", " ",].includes(e.key)) {
       time -= 3;
     }
-    if (!blankArr.includes(e.key) && e.key !== " ") {
+    if (!blankArr.includes(e.key) && e.key !== " " && time > 0) {
       for (let i = 0; i < wordToGuessArr.length; i++) {
         if (wordToGuessArr[i] === e.key.toLowerCase()) {
           $(`#${i}`).text(e.key.toLowerCase());
