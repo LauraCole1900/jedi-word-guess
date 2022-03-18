@@ -23,12 +23,15 @@ body {
   padding: 5vh;
 }
 
+#message,
 #timer,
-#word {
+#word,
+.centered {
   display: flex;
   justify-content: center;
 }
 
+#message,
 #timer p {
   font-size: 24;
 }

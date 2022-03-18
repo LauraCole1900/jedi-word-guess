@@ -43,6 +43,7 @@ $(document).ready(function () {
   const startButton = $(".startBtn")
   const gameDiv = $("#gameBoard");
   const wordDiv = $("#word");
+  const messageDiv = $("#message");
   const timerSpan = $("#timeLeft");
   const winSpan = $("#wins");
   const lossSpan = $("#losses");
@@ -68,6 +69,7 @@ $(document).ready(function () {
     startDiv.attr("style", "display: none");
     timerSpan.text(time);
     wordDiv.text("");
+    messageDiv.text("");
     findWord();
   }
 
@@ -80,6 +82,7 @@ $(document).ready(function () {
         losses++
         localStorage.setItem("losses", losses);
         lossSpan.text(losses);
+        messageDiv.text("You underestimate the power of the Dark Side.")
         clearInterval(timerCount);
       }
     }, (1000));
@@ -125,6 +128,7 @@ $(document).ready(function () {
       wins++
       localStorage.setItem("wins", wins);
       winSpan.text(wins);
+      messageDiv.text("The Force is strong with this one.")
     }
   }
 
