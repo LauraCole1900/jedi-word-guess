@@ -58,12 +58,16 @@ $(document).ready(function () {
   let wins = 0;
   let time = 0;
   let word = "";
+  let wordToGuessArr = [];
+  let blankArr = [];
   const wordArr = ["sith lord", "tatooine", "luke skywalker", "millenium falcon", "leia organa", "kylo ren", "ewoks", "wookiee", "grogu", "boba fett", "lightsaber", "jedi knight", "padawan", "coruscant", "ahsoka tano", "din djarin", "mandalorian", "darth vader", "anakin skywalker", "the force", "chewbacca", "yoda", "endor", "tusken raider", "obi-wan kenobi", "han solo", "death star", "tie fighter", "alderaan", "lando calrissian", "mos eisley", "jabba the hutt", "sarlacc", "droid", "kuiil", "moff gideon"]
 
   const findWord = () => {
     const wordIndex = Math.floor(Math.random() * wordArr.length)
     word = wordArr[wordIndex];
     console.log({ word });
+    wordToGuessArr = word.split("");
+    console.log({ wordToGuessArr });
     generateBlanks(word);
   }
 
@@ -72,12 +76,26 @@ $(document).ready(function () {
       let blankEl;
       if (letter === " ") {
         blankEl = $("<p>").text(" ").addClass("text-wrap").css("margin-right", "2rem");
+        blankArr.push(" ");
       } else {
         blankEl = $("<p>").text("__").addClass("text-wrap").css("margin-right", "1rem");
+        blankArr.push("_");
       }
       $(wordDiv).append(blankEl);
+      console.log({ blankArr });
     }
   }
+
+  const detectKeypress = (e) => {
+    for (let i = 0; i < wordToGuessArr.length; i++) {
+      if (wordToGuessArr[i] === e.key.toLowerCase()) {
+        console.log(true);
+        continue;
+      }
+    }
+  }
+
+  $(document).keyup(detectKeypress)
 
   findWord();
 
