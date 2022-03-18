@@ -43,16 +43,7 @@ $(document).ready(function () {
     timerCount = setInterval(function () {
       $(timerSpan).text(--time);
       if (time <= 0) {
-        time = 0;
-        timerSpan.text(time);
-        losses++;
-        localStorage.setItem("losses", losses);
-        lossSpan.text(losses);
-        messageDiv.text("You underestimate the power of the Dark Side.");
-        for (let i = 0; i < wordToGuessArr.length; i++) {
-          $(`#${i}`).text(wordToGuessArr[i]);
-        }
-        clearInterval(timerCount);
+        loseGame();
       }
     }, (1000));
   }
@@ -93,11 +84,28 @@ $(document).ready(function () {
       }
     }
     if (!blankArr.includes("_")) {
-      clearInterval(timerCount);
-      wins++;
-      localStorage.setItem("wins", wins);
-      winSpan.text(wins);
-      messageDiv.text("The Force is strong with this one.");
+      winGame();
+    }
+  }
+
+  const winGame = () => {
+    clearInterval(timerCount);
+    wins++;
+    localStorage.setItem("wins", wins);
+    winSpan.text(wins);
+    messageDiv.text("The Force is strong with this one.");
+  }
+
+  const loseGame = () => {
+    clearInterval(timerCount);
+    time = 0;
+    timerSpan.text(time);
+    losses++;
+    localStorage.setItem("losses", losses);
+    lossSpan.text(losses);
+    messageDiv.text("You underestimate the power of the Dark Side.");
+    for (let i = 0; i < wordToGuessArr.length; i++) {
+      $(`#${i}`).text(wordToGuessArr[i]);
     }
   }
 
