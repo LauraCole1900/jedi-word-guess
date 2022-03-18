@@ -40,13 +40,14 @@ $(document).ready(function () {
   // Global variables
   let divEl = $("<div>");
   const startDiv = $("#start");
-  const startButton = $(".startBtn")
+  const startButton = $(".startBtn");
   const gameDiv = $("#gameBoard");
   const wordDiv = $("#word");
   const messageDiv = $("#message");
   const timerSpan = $("#timeLeft");
   const winSpan = $("#wins");
   const lossSpan = $("#losses");
+  const clearButton = $("#clearBtn");
   let timerCount;
   let losses = 0;
   let wins = 0;
@@ -63,7 +64,7 @@ $(document).ready(function () {
   gameDiv.attr("style", "display: none");
 
   const startGame = () => {
-    time = 15;
+    time = 20;
     blankArr = [];
     gameDiv.attr("style", "display: block;");
     startDiv.attr("style", "display: none");
@@ -82,7 +83,10 @@ $(document).ready(function () {
         losses++
         localStorage.setItem("losses", losses);
         lossSpan.text(losses);
-        messageDiv.text("You underestimate the power of the Dark Side.")
+        messageDiv.text("You underestimate the power of the Dark Side.");
+        for (let i = 0; i < wordToGuessArr.length; i++) {
+          $(`#${i}`).text(wordToGuessArr[i]);
+        }
         clearInterval(timerCount);
       }
     }, (1000));
@@ -101,7 +105,7 @@ $(document).ready(function () {
       if (word[i] === " ") {
         blankEl = $("<p>").text(" ").addClass("text-wrap").attr("id", i).css("margin-right", "2rem");
       } else {
-        blankEl = $("<p>").text("__").addClass("text-wrap").attr("id", i).css("margin-right", "1rem");
+        blankEl = $("<p>").text("*").addClass("text-wrap").attr("id", i).css("margin-right", "1rem");
         blankArr.push("_");
       }
       $(wordDiv).append(blankEl);
@@ -132,8 +136,17 @@ $(document).ready(function () {
     }
   }
 
+  const clearScores = () => {
+    localStorage.clear();
+    wins = 0;
+    losses = 0;
+    winSpan.text(wins);
+    lossSpan.text(losses);
+  }
+
   $(document).keyup(detectKeypress)
 
   $(startButton).on("click", startGame);
 
+  $(clearButton).on("click", clearScores);
 });

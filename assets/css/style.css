@@ -40,11 +40,13 @@ body {
   font-size: 48px;
 }
 
+#clearBtn,
 .startBtn {
   color: var(--yellow);
   background-color: var(--graphite);
   border: 3px solid var(--yellow);
 }
+#clearBtn:hover,
 .startBtn:hover {
   box-shadow: 0 0 20px var(--yellow);
 }
