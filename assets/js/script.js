@@ -72,13 +72,12 @@ $(document).ready(function () {
   }
 
   const generateBlanks = (word) => {
-    for (letter of word) {
+    for (let i = 0; i < word.length; i++) {
       let blankEl;
-      if (letter === " ") {
-        blankEl = $("<p>").text(" ").addClass("text-wrap").css("margin-right", "2rem");
-        blankArr.push(" ");
+      if (word[i] === " ") {
+        blankEl = $("<p>").text(" ").addClass("text-wrap").attr("id", i).css("margin-right", "2rem");
       } else {
-        blankEl = $("<p>").text("__").addClass("text-wrap").css("margin-right", "1rem");
+        blankEl = $("<p>").text("__").addClass("text-wrap").attr("id", i).css("margin-right", "1rem");
         blankArr.push("_");
       }
       $(wordDiv).append(blankEl);
@@ -87,11 +86,20 @@ $(document).ready(function () {
   }
 
   const detectKeypress = (e) => {
-    for (let i = 0; i < wordToGuessArr.length; i++) {
-      if (wordToGuessArr[i] === e.key.toLowerCase()) {
-        console.log(true);
+    if (!blankArr.includes(e.key)) {
+      for (let i = 0; i < wordToGuessArr.length; i++) {
+        if (wordToGuessArr[i] === e.key.toLowerCase()) {
+          $(`#${i}`).text(e.key);
+          blankArr = blankArr.concat(e.key);
+          blankArr.shift();
+          console.log({ blankArr });
+        }
         continue;
       }
+    }
+    if (!blankArr.includes("_")) {
+      wins++
+      console.log({ wins });
     }
   }
 
