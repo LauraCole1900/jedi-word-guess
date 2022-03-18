@@ -22,13 +22,27 @@ body {
 }
 
 #gameBoard {
-  font-size: 48px;
   background-color: var(--graphite);
   height: 50vh;
   padding: 5vh;
 }
 
+#timer,
 #word {
   display: flex;
   justify-content: center;
+}
+
+#timer p {
+  font-size: 24;
+}
+
+#word {
+  font-size: 48px;
+}
+
+.startBtn {
+  color: var(--yellow);
+  background-color: var(--graphite);
+  border: 3px solid var(--yellow);
 }

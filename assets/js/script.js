@@ -51,21 +51,35 @@ $(document).ready(function () {
 
   // Global variables
   let divEl = $("<div>");
+  const startDiv = $("#start");
+  const startButton = $(".startBtn")
   const gameDiv = $("#gameBoard");
   const wordDiv = $("#word");
-  const letterDiv = $("#letters");
+  const timerDiv = $("#timer");
+  const timerSpan = $("#timeLeft");
   const winSpan = $("#wins");
   const lossSpan = $("#losses");
   let losses = 0;
   let wins = 0;
-  let time = 0;
+  let time = 30;
   let word = "";
   let wordToGuessArr = [];
   let blankArr = [];
   const wordArr = ["sith lord", "tatooine", "luke skywalker", "millenium falcon", "leia organa", "kylo ren", "ewoks", "wookiee", "grogu", "boba fett", "lightsaber", "jedi knight", "padawan", "coruscant", "ahsoka tano", "din djarin", "mandalorian", "darth vader", "anakin skywalker", "the force", "chewbacca", "yoda", "endor", "tusken raider", "obi-wan kenobi", "han solo", "death star", "tie fighter", "alderaan", "lando calrissian", "mos eisley", "jabba the hutt", "sarlacc", "droid", "kuiil", "moff gideon"];
 
   wins = localStorage.getItem("wins");
-  winSpan.text(wins);
+  winSpan.text(wins || "0");
+  losses = localStorage.getItem("losses");
+  lossSpan.text(losses || "0");
+  gameDiv.attr("style", "display: none");
+
+  const startGame = () => {
+    gameDiv.attr("style", "display: block;");
+    startDiv.attr("style", "display: none");
+    timerSpan.text(time);
+    wordDiv.text("");
+    findWord();
+  }
 
   const findWord = () => {
     const wordIndex = Math.floor(Math.random() * wordArr.length)
@@ -108,6 +122,6 @@ $(document).ready(function () {
 
   $(document).keyup(detectKeypress)
 
-  findWord();
+  $(startButton).on("click", startGame);
 
 });
