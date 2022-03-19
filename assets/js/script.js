@@ -34,7 +34,7 @@ $(document).ready(function () {
     gameDiv.attr("style", "display: block;");
     startDiv.attr("style", "display: none");
     timerSpan.text(time);
-    wordDiv.text("");
+    wordDiv.text("").focus();
     messageDiv.text("");
     findWord();
   }
@@ -121,7 +121,7 @@ $(document).ready(function () {
 
   $(document).keyup(detectKeypress);
 
-  $(startButton).on("click", startGame).focus();
+  $(startButton).on("click", startGame);
 
   $(clearButton).on("click", clearScores);
 });
