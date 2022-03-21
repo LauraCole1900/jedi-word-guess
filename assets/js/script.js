@@ -39,14 +39,14 @@ $(document).ready(function () {
     wordDiv.text("");
     messageDiv.text("");
     findWord();
-    $(document).on("touchstart", keepFocus)
+    // $(document).on("touchstart", keepFocus);
   }
 
-  const keepFocus = () => {
-    setTimeout(function() {
-      $(document).find("#hidden").focus();
-    }, 100);
-  }
+  // const keepFocus = () => {
+  //   setTimeout(function() {
+  //     $(document).find("#hidden").focus();
+  //   }, 100);
+  // }
 
   const startTimer = () => {
     timerCount = setInterval(function () {
