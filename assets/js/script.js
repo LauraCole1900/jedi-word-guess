@@ -27,26 +27,26 @@ $(document).ready(function () {
   losses = localStorage.getItem("losses");
   lossSpan.text(losses || "0");
   gameDiv.attr("style", "display: none");
-  startDiv.attr("style", "display: none");
-  // $(".results").append("<input type='text' id='hidden'");
-  // $("#hidden").css({"position": "fixed", "left": "120%"}).focus();
   
   const startGame = () => {
     time = 20;
     blankArr = [];
     gameDiv.attr("style", "display: block;");
+    startDiv.attr("style", "display: none");
+    gameDiv.append("<input type='text' id='hidden'");
+    $("#hidden").css({"position": "fixed", "left": "120%"}).focus();
     timerSpan.text(time);
     wordDiv.text("");
     messageDiv.text("");
     findWord();
-    // $(document).on("touchstart", keepFocus);
+    $(document).on("touchstart", keepFocus);
   }
 
-  // const keepFocus = () => {
-  //   setTimeout(function() {
-  //     $(document).find("#hidden").focus();
-  //   }, 100);
-  // }
+  const keepFocus = () => {
+    setTimeout(function() {
+      $(document).find("#hidden").focus();
+    }, 100);
+  }
 
   const startTimer = () => {
     timerCount = setInterval(function () {
