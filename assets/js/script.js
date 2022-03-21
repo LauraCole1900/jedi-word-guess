@@ -28,8 +28,8 @@ $(document).ready(function () {
   lossSpan.text(losses || "0");
   gameDiv.attr("style", "display: none");
   startDiv.attr("style", "display: none");
-  $(".results").append("<input type='text' id='hidden'");
-  $("#hidden").css({"position": "fixed", "left": "120%"}).focus();
+  // $(".results").append("<input type='text' id='hidden'");
+  // $("#hidden").css({"position": "fixed", "left": "120%"}).focus();
   
   const startGame = () => {
     time = 20;
