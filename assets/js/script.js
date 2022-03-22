@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
 
   // Global variables
   let divEl = $("<div>");
